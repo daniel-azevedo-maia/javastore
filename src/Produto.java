@@ -4,7 +4,25 @@ public class Produto {
 
     private String nome;
     private BigDecimal preco;
-    private int quantidade;
+    private Long codigo;
+
+    public Long getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(Long codigo) {
+        this.codigo = codigo;
+    }
+
+    public Produto(Long codigo, String nome, BigDecimal preco) {
+        this.nome = nome;
+        this.preco = preco;
+        this.codigo = codigo;
+    }
+
+    public Produto() {
+
+    }
 
     public String getNome() {
         return nome;
@@ -22,24 +40,11 @@ public class Produto {
         this.preco = preco;
     }
 
-    public int getQuantidade() {
-        return quantidade;
-    }
-
-    public void setQuantidade(int quantidade) {
-        this.quantidade = quantidade;
-    }
-
-    private BigDecimal valorFinal() {
-        return this.preco.multiply(BigDecimal.valueOf(this.quantidade));
-    }
-
     @Override
     public String toString() {
         return "Produto{" +
                 "nome='" + nome + '\'' +
                 ", preco=" + preco +
-                ", quantidade=" + quantidade +
                 '}';
     }
 }

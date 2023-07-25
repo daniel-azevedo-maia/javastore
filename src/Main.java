@@ -1,6 +1,7 @@
 import com.sun.source.tree.TryTree;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.*;
 
 public class Main {
@@ -43,24 +44,31 @@ public class Main {
                         continue; // isso irá pular o restante do código na iteração atual do loop e iniciar a próxima iteração
                     }
 
-                    System.out.print("Quantidade: ");
-                    int quantidade = input.nextInt();
-
                     Produto produto = new Produto();
                     produto.setNome(nome);
                     produto.setPreco(precoBigDecimal);
-                    produto.setQuantidade(quantidade);
 
                     carrinho.adicionarItem(produto);
 
                     break;
 
                 case 2:
-                    System.out.println("Segunda opção selecionada.");
+                    mostrarProdutosEstoque();
+                    System.out.print("Informe ID do produto para checar preço: ");
+                    Long opcaoConsulta = input.nextLong();
+
+                    String nomeProdutoEncontrado = BancoDeDadosFicticio.relacaoParaConsulta.get(opcaoConsulta).getNome();
+                    BigDecimal precoProdutoEncontrado = BancoDeDadosFicticio.relacaoParaConsulta.get(opcaoConsulta).getPreco();
+
+                    System.out.println("\nDADOS DO PRODUTO CONSULTADO: ");
+
+                    System.out.println(nomeProdutoEncontrado);
+                    System.out.println(precoProdutoEncontrado);
+
                     break;
 
                 case 3:
-                    System.out.println("Terceira opção selecionada.");
+                    //TODO opcao3
                     break;
 
                 case 4:
@@ -73,7 +81,7 @@ public class Main {
             }
 
             System.out.print("\nDeseja continuar? [S/N] ");
-            continuar = input.next();
+            continuar = input.nextLine();
 
             limpaTela();
 
@@ -81,6 +89,23 @@ public class Main {
 
         input.close();
         System.out.println("\nVolte sempre!");
+    }
+
+    private static void mostrarProdutosEstoque() {
+
+        List<Produto> estoque = BancoDeDadosFicticio.produtos;
+
+
+        System.out.printf("%-10s %-30s\n", "Código", "Nome");
+        System.out.println("-----------------------------------");
+        for (Produto produto : estoque) {
+            System.out.printf("%-10d %-30s\n",
+                    produto.getCodigo(),
+                    produto.getNome());
+        }
+
+        System.out.println();
+
     }
 
     private static void apresentacao() throws InterruptedException {
