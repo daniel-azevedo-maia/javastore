@@ -4,24 +4,20 @@ public class Produto {
 
     private String nome;
     private BigDecimal preco;
-    private Long codigo;
+    private Integer codigo;
 
-    public Long getCodigo() {
+    public Integer getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(Long codigo) {
+    public void setCodigo(Integer codigo) {
         this.codigo = codigo;
     }
 
-    public Produto(Long codigo, String nome, BigDecimal preco) {
+    public Produto(Integer codigo, String nome, BigDecimal preco) {
         this.nome = nome;
         this.preco = preco;
         this.codigo = codigo;
-    }
-
-    public Produto() {
-
     }
 
     public String getNome() {
